@@ -36,7 +36,7 @@
                     editor_name: "{{ editable_html_obj.editor_name }}",
                     edit_data: CKEDITOR.instances[editorIDName].getData(),
                 };
-                $.post("{{ url_for('admin.update_editor_contents') }}", json_data);
+                $.post("{{ url_for('admin2.update_editor_contents') }}", json_data);
                 CKEDITOR.instances[editorIDName].destroy();
             }
             $(".end-edit").hide();

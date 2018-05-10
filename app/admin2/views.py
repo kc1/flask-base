@@ -11,7 +11,7 @@ from flask_login import current_user, login_required
 from flask_rq import get_queue
 
 from app import db
-from app.admin.forms import (
+from app.admin2.forms import (
     ChangeAccountTypeForm,
     ChangeUserEmailForm,
     InviteUserForm,
@@ -21,7 +21,7 @@ from app.decorators import admin_required
 from app.email import send_email
 from app.models import EditableHTML, Role, User
 
-admin = Blueprint('admin', __name__)
+admin = Blueprint('admin2', __name__)
 
 
 @admin.route('/')
@@ -135,7 +135,7 @@ def change_account_type(user_id):
     if current_user.id == user_id:
         flash('You cannot change the type of your own account. Please ask '
               'another administrator to do this.', 'error')
-        return redirect(url_for('admin.user_info', user_id=user_id))
+        return redirect(url_for('admin2.user_info', user_id=user_id))
 
     user = User.query.get(user_id)
     if user is None:
@@ -174,7 +174,7 @@ def delete_user(user_id):
         db.session.delete(user)
         db.session.commit()
         flash('Successfully deleted user %s.' % user.full_name(), 'success')
-    return redirect(url_for('admin.registered_users'))
+    return redirect(url_for('admin2.registered_users'))
 
 
 @admin.route('/_update_editor_contents', methods=['POST'])

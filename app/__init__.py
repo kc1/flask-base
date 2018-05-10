@@ -12,6 +12,9 @@ from flask_wtf import CsrfProtect
 from app.assets import app_css, app_js, vendor_css, vendor_js
 from config import config
 
+from flask_admin import Admin, BaseView, expose
+from flask_admin.contrib.sqla import ModelView
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 mail = Mail()
@@ -41,6 +44,8 @@ def create_app(config_name):
     compress.init_app(app)
     RQ(app)
 
+    adm = Admin(name='flaskadmin')
+
     # Register Jinja template functions
     from .utils import register_template_utils
     register_template_utils(app)
@@ -69,7 +74,9 @@ def create_app(config_name):
     from .account import account as account_blueprint
     app.register_blueprint(account_blueprint, url_prefix='/account')
 
-    from .admin import admin as admin_blueprint
-    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    # from .admin2 import admin2 as admin_blueprint
+    from .admin2 import admin as admin_blueprint
+    # app.register_blueprint(admin_blueprint, url_prefix='/admin2')
+    app.register_blueprint(admin_blueprint, url_prefix='/admin2')
 
     return app

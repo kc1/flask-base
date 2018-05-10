@@ -1,12 +1,12 @@
 {% extends 'layouts/base.html' %}
 {% import 'macros/form_macros.html' as f %}
 
-{% set deletion_endpoint = 'admin.delete_user_request' %}
+{% set deletion_endpoint = 'admin2.delete_user_request' %}
 
 {% set endpoints = [
-    ('admin.user_info', 'User information'),
-    ('admin.change_user_email', 'Change email address'),
-    ('admin.change_account_type', 'Change account type'),
+    ('admin2.user_info', 'User information'),
+    ('admin2.change_user_email', 'Change email address'),
+    ('admin2.change_account_type', 'Change account type'),
     (deletion_endpoint, 'Delete user')
 ] %}
 
@@ -32,7 +32,7 @@
 {% block content %}
     <div class="ui stackable centered grid container">
         <div class="twelve wide column">
-            <a class="ui basic compact button" href="{{ url_for('admin.registered_users') }}">
+            <a class="ui basic compact button" href="{{ url_for('admin2.registered_users') }}">
                 <i class="caret left icon"></i>
                 Back to all users
             </a>
@@ -83,7 +83,7 @@
         $('.deletion.checkbox').checkbox({
             onChecked: function() {
                 $('.deletion.button').removeClass('disabled')
-                        .attr('href', '{{ url_for('admin.delete_user', user_id=user.id) }}');
+                        .attr('href', '{{ url_for('admin2.delete_user', user_id=user.id) }}');
             },
             onUnchecked: function() {
                 $('.deletion.button').addClass('disabled').removeAttr('href');

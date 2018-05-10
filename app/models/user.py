@@ -27,7 +27,7 @@ class Role(db.Model):
             'User': (Permission.GENERAL, 'main', True),
             'Administrator': (
                 Permission.ADMINISTER,
-                'admin',
+                'admin2',
                 False  # grants all permissions
             )
         }
