@@ -79,4 +79,9 @@ def create_app(config_name):
     # app.register_blueprint(admin_blueprint, url_prefix='/admin2')
     app.register_blueprint(admin_blueprint, url_prefix='/admin2')
 
+    with app.app_context():
+        m =app.url_map
+        rules = m._rules
+
+
     return app
