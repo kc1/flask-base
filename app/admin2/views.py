@@ -29,7 +29,7 @@ admin = Blueprint('admin2', __name__)
 @admin_required
 def index():
     """Admin dashboard page."""
-    return render_template('admin/index.html')
+    return render_template('admin2/index.html')
 
 
 @admin.route('/new-user', methods=['GET', 'POST'])
@@ -49,7 +49,7 @@ def new_user():
         db.session.commit()
         flash('User {} successfully created'.format(user.full_name()),
               'form-success')
-    return render_template('admin/new_user.html', form=form)
+    return render_template('admin2/new_user.html', form=form)
 
 
 @admin.route('/invite-user', methods=['GET', 'POST'])
@@ -82,7 +82,7 @@ def invite_user():
         )
         flash('User {} successfully invited'.format(user.full_name()),
               'form-success')
-    return render_template('admin/new_user.html', form=form)
+    return render_template('admin2/new_user.html', form=form)
 
 
 @admin.route('/users')
@@ -93,7 +93,7 @@ def registered_users():
     users = User.query.all()
     roles = Role.query.all()
     return render_template(
-        'admin/registered_users.html', users=users, roles=roles)
+        'admin2/registered_users.html', users=users, roles=roles)
 
 
 @admin.route('/user/<int:user_id>')
@@ -105,7 +105,7 @@ def user_info(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         abort(404)
-    return render_template('admin/manage_user.html', user=user)
+    return render_template('admin2/manage_user.html', user=user)
 
 
 @admin.route('/user/<int:user_id>/change-email', methods=['GET', 'POST'])
@@ -123,7 +123,7 @@ def change_user_email(user_id):
         db.session.commit()
         flash('Email for user {} successfully changed to {}.'.format(
             user.full_name(), user.email), 'form-success')
-    return render_template('admin/manage_user.html', user=user, form=form)
+    return render_template('admin2/manage_user.html', user=user, form=form)
 
 
 @admin.route(
@@ -147,7 +147,7 @@ def change_account_type(user_id):
         db.session.commit()
         flash('Role for user {} successfully changed to {}.'.format(
             user.full_name(), user.role.name), 'form-success')
-    return render_template('admin/manage_user.html', user=user, form=form)
+    return render_template('admin2/manage_user.html', user=user, form=form)
 
 
 @admin.route('/user/<int:user_id>/delete')
@@ -158,7 +158,7 @@ def delete_user_request(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         abort(404)
-    return render_template('admin/manage_user.html', user=user)
+    return render_template('admin2/manage_user.html', user=user)
 
 
 @admin.route('/user/<int:user_id>/_delete')

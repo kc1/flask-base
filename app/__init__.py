@@ -44,7 +44,7 @@ def create_app(config_name):
     compress.init_app(app)
     RQ(app)
 
-    adm = Admin(name='flaskadmin')
+    adm = Admin(app,name='flaskadmin')
 
     # Register Jinja template functions
     from .utils import register_template_utils
